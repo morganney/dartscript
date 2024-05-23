@@ -1,0 +1,10 @@
+name: dartscript
+description: CLI tool for creating a JavaScript module from a Dart function.
+version: 0.0.0
+repository: https://github.com/morganney/dartscript
+
+environment:
+  sdk: ^3.4.0
+
+dependencies:
+  js: ^0.7.1

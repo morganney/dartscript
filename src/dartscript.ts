@@ -1,33 +1,40 @@
 #!/usr/bin/env node
 
+/**
+ * dartscript --func greeting file.dart
+ */
+
 import { parseArgs } from 'node:util'
-import { readFile, writeFile } from 'node:fs/promises'
+import { readFile, writeFile, rm } from 'node:fs/promises'
+import { randomBytes } from 'node:crypto'
 
 import { parse } from 'acorn'
 import { simple } from 'acorn-walk'
 import MagicString from 'magic-string'
 
+import { compile } from './compile.js'
+
 type ParsedArgs = {
+  func: string
   in: string
   out: string
   module: 'es' | 'cjs'
   default: boolean
-  identifier: string
 }
 let parsedArgs: ParsedArgs | null = null
 
 try {
   const { values, positionals } = parseArgs({
     options: {
-      in: {
+      func: {
         type: 'string',
-        short: 'i',
-        default: 'out.js',
+        short: 'f',
+        default: '',
       },
       out: {
         type: 'string',
         short: 'o',
-        default: 'jsout.js',
+        default: 'func.js',
       },
       module: {
         type: 'string',
@@ -43,12 +50,16 @@ try {
   })
 
   if (!positionals.length) {
-    throw new Error('Function name is required.')
+    throw new Error('Input dart file required as positional.')
+  }
+
+  if (!values?.func) {
+    throw new Error('The --func option is required.')
   }
 
   parsedArgs = {
     ...(values as Omit<ParsedArgs, 'identifier'>),
-    identifier: positionals[0],
+    in: positionals[0],
   }
 } catch (err) {
   if (err instanceof Error) {
@@ -57,8 +68,10 @@ try {
 }
 
 if (parsedArgs) {
+  const hex = randomBytes(4).toString('hex')
+  const compileOut = `_${hex}_.js`
   const getFileContents = async () => {
-    const buffer = await readFile(parsedArgs.in)
+    const buffer = await readFile(compileOut)
 
     return buffer.toString()
   }
@@ -69,7 +82,7 @@ if (parsedArgs) {
       magic.prepend(
         parsedArgs.default
           ? 'module.exports = function '
-          : `exports.${parsedArgs.identifier} = function `,
+          : `exports.${parsedArgs.func} = function `,
       )
     } else {
       magic.prepend(parsedArgs.default ? 'export default function ' : 'export function ')
@@ -90,7 +103,7 @@ if (parsedArgs) {
             if (property.type === 'Property') {
               if (
                 property.key.type === 'Identifier' &&
-                property.key.name === parsedArgs.identifier
+                property.key.name === parsedArgs.func
               ) {
                 found.push(magic.snip(property.start, property.end).toString())
               }
@@ -111,6 +124,19 @@ if (parsedArgs) {
       }
     }
   }
+  const main = async () => {
+    try {
+      await compile(parsedArgs.in, compileOut)
+      await convertFunctionToModule()
+    } catch (err) {
+      if (err instanceof Error) {
+        console.log(`Error compiling to JS module: ${err.message}`)
+      }
+    } finally {
+      await rm(compileOut, { force: true })
+      await rm(`${compileOut}.deps`, { force: true })
+    }
+  }
 
-  convertFunctionToModule()
+  main()
 }

@@ -1,6 +1,6 @@
 {
   "name": "dartscript",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Tool for generating JavaScript module of a function from a Dart build.",
   "type": "module",
   "main": "dist",
