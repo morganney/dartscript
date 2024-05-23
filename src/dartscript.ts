@@ -1,9 +1,5 @@
 #!/usr/bin/env node
 
-/**
- * dartscript --func greeting file.dart
- */
-
 import { parseArgs } from 'node:util'
 import { readFile, writeFile, rm } from 'node:fs/promises'
 import { randomBytes } from 'node:crypto'
@@ -97,7 +93,6 @@ if (parsedArgs) {
 
     if (ast) {
       simple(ast, {
-        // dart compile js -O0 produces the named function as part of an object expression
         ObjectExpression(node) {
           node.properties.forEach(property => {
             if (property.type === 'Property') {
