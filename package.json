@@ -1,0 +1,51 @@
+{
+  "name": "dartscript",
+  "version": "1.0.0-alpha.0",
+  "description": "Tool for generating JavaScript module of a function from a Dart build.",
+  "type": "module",
+  "main": "dist",
+  "bin": "dist/cjs/dartscript.cjs",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/dartscript.js",
+      "require": "./dist/cjs/dartscript.cjs",
+      "default": "./dist/esm/dartscript.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "prettier": "prettier -w .",
+    "build": "duel --dirs",
+    "prepack": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dart",
+    "function",
+    "javascript",
+    "module"
+  ],
+  "files": [
+    "dist"
+  ],
+  "author": "Morgan Ney <morganney@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "acorn": "^8.11.3",
+    "acorn-walk": "^8.3.2",
+    "magic-string": "^0.30.10"
+  },
+  "devDependencies": {
+    "@knighted/duel": "^1.0.7",
+    "@types/node": "^20.12.12",
+    "prettier": "^3.2.5",
+    "tsx": "^4.10.5",
+    "typescript": "^5.4.5"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "printWidth": 90,
+    "semi": false,
+    "singleQuote": true
+  }
+}
