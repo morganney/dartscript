@@ -17,7 +17,7 @@ dependencies:
 
 ## Example
 
-Given a file with a Dart function (that possible calls another function)
+Given a file with a Dart function (that possibly calls another function)
 
 **file.dart**
 
