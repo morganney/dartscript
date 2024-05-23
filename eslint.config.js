@@ -8,6 +8,7 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   {
     rules: {
+      'no-console': 'error',
       'n/no-process-exit': 'off',
       'n/hashbang': 'off',
     },

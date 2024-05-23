@@ -1,6 +1,6 @@
 {
   "name": "dartscript",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "Tool for generating JavaScript module of a function from a Dart build.",
   "type": "module",
   "main": "dist",
@@ -33,8 +33,6 @@
   "files": [
     "dist"
   ],
-  "author": "Morgan Ney <morganney@gmail.com>",
-  "license": "MIT",
   "dependencies": {
     "acorn": "^8.11.3",
     "acorn-walk": "^8.3.2",
@@ -50,6 +48,15 @@
     "tsx": "^4.10.5",
     "typescript": "^5.4.5",
     "typescript-eslint": "^8.0.0-alpha.14"
+  },
+  "author": "Morgan Ney <morganney@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/morganney/dartscript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/morganney/dartscript/issues"
   },
   "prettier": {
     "arrowParens": "avoid",
