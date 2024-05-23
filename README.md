@@ -1,5 +1,6 @@
 ## [`dartscript`](https://www.npmjs.com/package/dartscript)
 
+![CI](https://github.com/morganney/dartscript/actions/workflows/ci.yml/badge.svg)
 [![NPM version](https://img.shields.io/npm/v/dartscript.svg)](https://www.npmjs.com/package/dartscript)
 
 Simple CLI utility for creacting a JavaScript module of a [Dart function](https://dart.dev/language/functions).
@@ -66,3 +67,16 @@ You pass the name of the input Dart file as a positional.
 - `--out` The name of the build file for `dartscript` to produce (defaults to `func.js`)
 - `--module` The module system type, `es | cjs` (defaults to `es`)
 - `--default` Whether to export the function using a default export for the module system (defaults to `false`)
+
+You can run `dartscript --help`:
+
+```console
+Usage: dartscript [options] <path-to-file.dart>
+
+Options:
+--func, -f [string]  The name of the dart function to extract into a module. Required.
+--out, -o [path] 	 Where to save the output file. Defaults to func.js.
+--module, -m 		 What module system to use. Defaults to es. [es | cjs].
+--default, -d 		 Whether to use a default export. Defaults to named export.
+--help, -h 		     Print this message.
+```
