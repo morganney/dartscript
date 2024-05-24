@@ -84,8 +84,12 @@ export const dartscript = async (args?: ParseArgsConfig['args']) => {
     }
   }
 }
-const realFileUrlArgv1 = await getRealPathAsFileUrl(argv[1])
+const main = async () => {
+  const realFileUrlArgv1 = await getRealPathAsFileUrl(argv[1])
 
-if (import.meta.url === realFileUrlArgv1) {
-  await dartscript()
+  if (import.meta.url === realFileUrlArgv1) {
+    await dartscript()
+  }
 }
+
+main()
