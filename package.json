@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.2",
   "description": "Tool for generating JavaScript module of a function from a Dart build.",
   "type": "module",
-  "main": "dist",
+  "main": "dist/esm/dartscript.js",
   "bin": "dist/esm/dartscript.js",
   "exports": {
     ".": {
@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.3.0",
-    "@knighted/duel": "^1.0.7",
+    "@knighted/duel": "^2.0.0-rc.0",
     "@types/node": "^20.12.12",
     "eslint": "^9.3.0",
     "eslint-plugin-n": "^17.7.0",

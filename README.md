@@ -74,9 +74,9 @@ You can run `dartscript --help`:
 Usage: dartscript [options] <path-to-file.dart>
 
 Options:
---func, -f [string]  The name of the dart function to extract into a module. Required.
+--func, -f [string] 	 The name of the dart function to extract into a module. Required.
 --out, -o [path] 	 Where to save the output file. Defaults to func.js.
 --module, -m 		 What module system to use. Defaults to es. [es | cjs].
 --default, -d 		 Whether to use a default export. Defaults to named export.
---help, -h 		     Print this message.
+--help, -h 		 Print this message.
 ```
