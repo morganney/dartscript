@@ -1,4 +1,4 @@
-import { describe, it } from 'node:test'
+import { describe } from 'node:test'
 
 describe('dartscript', () => {
   // TODO

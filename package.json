@@ -1,20 +1,25 @@
 {
   "name": "dartscript",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "Tool for generating JavaScript module of a function from a Dart build.",
   "type": "module",
-  "main": "dist",
-  "bin": "dist/cjs/dartscript.cjs",
+  "main": "dist/esm/dartscript.js",
+  "bin": "dist/esm/dartscript.js",
   "exports": {
     ".": {
       "import": "./dist/esm/dartscript.js",
       "require": "./dist/cjs/dartscript.cjs",
-      "default": "./dist/esm/dartscript.cjs"
+      "default": "./dist/esm/dartscript.js"
     },
     "./package.json": "./package.json"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "engineStrict": true,
   "scripts": {
     "prettier": "prettier -w .",
+    "lint": "eslint --ignore-pattern dist .",
     "build": "duel --dirs",
     "prepack": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -28,19 +33,30 @@
   "files": [
     "dist"
   ],
-  "author": "Morgan Ney <morganney@gmail.com>",
-  "license": "MIT",
   "dependencies": {
     "acorn": "^8.11.3",
     "acorn-walk": "^8.3.2",
     "magic-string": "^0.30.10"
   },
   "devDependencies": {
-    "@knighted/duel": "^1.0.7",
+    "@eslint/js": "^9.3.0",
+    "@knighted/duel": "^2.0.0-rc.0",
     "@types/node": "^20.12.12",
+    "eslint": "^9.3.0",
+    "eslint-plugin-n": "^17.7.0",
     "prettier": "^3.2.5",
     "tsx": "^4.10.5",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^8.0.0-alpha.14"
+  },
+  "author": "Morgan Ney <morganney@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/morganney/dartscript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/morganney/dartscript/issues"
   },
   "prettier": {
     "arrowParens": "avoid",
